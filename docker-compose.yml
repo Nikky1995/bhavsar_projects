@@ -1,0 +1,16 @@
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-bhavsar2024}
+      - NEXT_PUBLIC_SITE_URL=https://bhavsarprojects.com
+    volumes:
+      - event-data:/app/data
+      - event-uploads:/app/public/uploads/events
+    restart: unless-stopped
+
+volumes:
+  event-data:
+  event-uploads:

@@ -1,0 +1,43 @@
+{
+  "events": [
+    {
+      "id": "sample-mh-1",
+      "title": "Maharashtra Samaj Sammelan",
+      "description": "Annual gathering of Bhavsar Kshatriya families across Maharashtra for cultural programs, networking, and community welfare discussions.",
+      "state": "Maharashtra",
+      "stateCode": "MH",
+      "location": "Pune, Maharashtra",
+      "date": "2026-08-15",
+      "type": "upcoming_event",
+      "images": [],
+      "createdAt": "2026-01-01T00:00:00.000Z",
+      "updatedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "sample-gj-1",
+      "title": "Gujarat Youth Empowerment Drive",
+      "description": "Skill development workshop and scholarship guidance session for young members of the Bhavsar community in Gujarat.",
+      "state": "Gujarat",
+      "stateCode": "GJ",
+      "location": "Ahmedabad, Gujarat",
+      "date": "2026-05-10",
+      "type": "social_activity",
+      "images": [],
+      "createdAt": "2026-01-01T00:00:00.000Z",
+      "updatedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "sample-ka-1",
+      "title": "Karnataka Tulja Bhavani Puja",
+      "description": "Community puja and prasad distribution organized by the Bangalore Bhavsar Samaj chapter.",
+      "state": "Karnataka",
+      "stateCode": "KA",
+      "location": "Bengaluru, Karnataka",
+      "date": "2026-04-20",
+      "type": "upcoming_event",
+      "images": [],
+      "createdAt": "2026-01-01T00:00:00.000Z",
+      "updatedAt": "2026-01-01T00:00:00.000Z"
+    }
+  ]
+}
