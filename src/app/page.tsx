@@ -3,6 +3,7 @@ import Link from "next/link";
 import IndiaMapSection from "@/components/IndiaMapSection";
 import { readEvents } from "@/lib/db";
 import EventCard from "@/components/EventCard";
+import EventPhotoGallery from "@/components/EventPhotoGallery";
 
 export default async function HomePage() {
   const events = await readEvents();
@@ -24,7 +25,7 @@ export default async function HomePage() {
             <div className="absolute -inset-3 rounded-full bg-gradient-to-br from-amber-400 to-orange-600 opacity-60 blur-xl" />
             <div className="relative overflow-hidden rounded-2xl border-4 border-amber-300/50 shadow-2xl">
               <Image
-                src="/images/tulja-bhavani-mata.svg"
+                src="/images/Tulja_bhavani.jpeg"
                 alt="Tulja Bhavani Mata — presiding deity of the Bhavsar Kshatriya Samaj"
                 width={320}
                 height={400}
@@ -83,6 +84,11 @@ export default async function HomePage() {
       {/* Interactive Map */}
       <div id="map">
         <IndiaMapSection initialEvents={events} />
+      </div>
+
+      {/* Event photo gallery */}
+      <div id="photos">
+        <EventPhotoGallery events={events} limit={8} showViewAllLink />
       </div>
 
       {/* Upcoming events preview */}

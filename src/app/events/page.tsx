@@ -1,4 +1,5 @@
 import EventCard from "@/components/EventCard";
+import EventPhotoGallery from "@/components/EventPhotoGallery";
 import { readEvents } from "@/lib/db";
 
 export default async function EventsPage() {
@@ -52,6 +53,14 @@ export default async function EventsPage() {
           No events listed yet. Check back soon!
         </p>
       )}
+
+      <div id="photos" className="-mx-4 mt-12 sm:-mx-6 lg:-mx-8">
+        <EventPhotoGallery
+          events={events}
+          title="Community Photo Gallery"
+          description="Browse photos from Bhavsar Kshatriya Samaj events and social activities."
+        />
+      </div>
     </div>
   );
 }

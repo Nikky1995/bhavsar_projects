@@ -9,9 +9,15 @@
       "location": "Pune, Maharashtra",
       "date": "2026-08-15",
       "type": "upcoming_event",
-      "images": [],
+      "images": [
+        {
+          "id": "b05c9851-a5ae-434a-8efa-cf1314646127",
+          "url": "/uploads/events/8172188a-57b1-457d-a513-24b422e8636e.jpg",
+          "createdAt": "2026-06-28T09:45:41.586Z"
+        }
+      ],
       "createdAt": "2026-01-01T00:00:00.000Z",
-      "updatedAt": "2026-01-01T00:00:00.000Z"
+      "updatedAt": "2026-06-28T09:45:41.586Z"
     },
     {
       "id": "sample-gj-1",

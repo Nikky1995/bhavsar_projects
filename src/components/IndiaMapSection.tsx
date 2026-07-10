@@ -5,12 +5,22 @@ import { useCallback, useEffect, useState } from "react";
 import type { Event } from "@/lib/types";
 import { getStateName } from "@/lib/states";
 import EventCard from "./EventCard";
+import EventPhotosPanel from "./EventPhotosPanel";
 
 const IndiaMap = dynamic(() => import("@aryanjsx/indiamap"), {
   ssr: false,
   loading: () => (
     <div className="flex h-[500px] items-center justify-center rounded-xl bg-orange-50">
       <p className="text-orange-700">Loading map...</p>
+    </div>
+  ),
+});
+
+const StateDistrictMap = dynamic(() => import("./StateDistrictMap"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex h-[500px] items-center justify-center rounded-xl bg-orange-50">
+      <p className="text-orange-700">Loading district map...</p>
     </div>
   ),
 });
@@ -22,6 +32,7 @@ interface IndiaMapSectionProps {
 export default function IndiaMapSection({ initialEvents = [] }: IndiaMapSectionProps) {
   const [events, setEvents] = useState<Event[]>(initialEvents);
   const [selectedState, setSelectedState] = useState<string | null>(null);
+  const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null);
 
   useEffect(() => {
     fetch("/api/events")
@@ -32,42 +43,91 @@ export default function IndiaMapSection({ initialEvents = [] }: IndiaMapSectionP
 
   const stateName = selectedState ? getStateName(selectedState) : null;
 
-  const stateEvents = selectedState
-    ? events.filter((e) => e.stateCode === selectedState)
+  const regionEvents = selectedState
+    ? events.filter((event) => {
+        if (event.stateCode !== selectedState) return false;
+        if (!selectedDistrict) return true;
+        return event.location.toLowerCase().includes(selectedDistrict.toLowerCase());
+      })
     : [];
 
-  const socialActivities = stateEvents.filter((e) => e.type === "social_activity");
-  const upcomingEvents = stateEvents.filter((e) => e.type === "upcoming_event");
+  const socialActivities = regionEvents.filter((e) => e.type === "social_activity");
+  const upcomingEvents = regionEvents.filter((e) => e.type === "upcoming_event");
 
-  const handleClick = useCallback((stateCode: string) => {
-    setSelectedState((prev) => (prev === stateCode ? null : stateCode));
+  const handleStateClick = useCallback((stateCode: string) => {
+    setSelectedState(stateCode);
+    setSelectedDistrict(null);
   }, []);
+
+  const handleDistrictClick = useCallback((district: string) => {
+    setSelectedDistrict((prev) => (prev === district ? null : district));
+  }, []);
+
+  const handleBackToIndia = useCallback(() => {
+    setSelectedState(null);
+    setSelectedDistrict(null);
+  }, []);
+
+  const regionLabel = selectedDistrict
+    ? `${selectedDistrict}, ${stateName}`
+    : stateName;
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       <div className="mb-8 text-center">
-        <h2 className="text-3xl font-bold text-orange-950">Community Map of India</h2>
+        <h2 className="text-3xl font-bold text-orange-950">
+          {selectedState ? `${stateName} District Map` : "Community Map of India"}
+        </h2>
         <p className="mt-2 text-gray-600">
-          Hover over a state to highlight it, then click to explore Bhavsar Kshatriya Samaj
-          activities and upcoming events in that region.
+          {selectedState
+            ? "Hover over a district to highlight it, then click to explore activities in that area. Use Back to return to the India map."
+            : "Hover over a state to highlight it, then click to open its district map and explore Bhavsar Kshatriya Samaj activities."}
         </p>
       </div>
 
       <div className="grid gap-8 lg:grid-cols-2">
         <div className="relative rounded-2xl border border-orange-100 bg-gradient-to-br from-orange-50 to-amber-50 p-4 shadow-inner">
-          {stateName && (
-            <div className="absolute left-4 top-4 z-10 rounded-lg bg-white/90 px-3 py-1.5 text-sm font-semibold text-orange-900 shadow-sm backdrop-blur">
-              {stateName}
+          {selectedState && (
+            <button
+              type="button"
+              onClick={handleBackToIndia}
+              className="absolute left-4 top-4 z-10 flex items-center gap-1 rounded-lg bg-white/90 px-3 py-1.5 text-sm font-semibold text-orange-900 shadow-sm backdrop-blur transition hover:bg-white"
+            >
+              ← Back to India
+            </button>
+          )}
+
+          {regionLabel && (
+            <div
+              className={`absolute z-10 rounded-lg bg-white/90 px-3 py-1.5 text-sm font-semibold text-orange-900 shadow-sm backdrop-blur ${
+                selectedState ? "right-4 top-4" : "left-4 top-4"
+              }`}
+            >
+              {regionLabel}
             </div>
           )}
-          <IndiaMap
-            onClick={handleClick}
-            size="100%"
-            mapColor="#fef3c7"
-            strokeColor="#c2410c"
-            strokeWidth="0.8"
-            hoverColor="#ea580c"
-          />
+
+          {selectedState ? (
+            <StateDistrictMap
+              key={selectedState}
+              stateCode={selectedState}
+              onClick={handleDistrictClick}
+              size="100%"
+              mapColor="#fef3c7"
+              strokeColor="#c2410c"
+              strokeWidth="0.8"
+              hoverColor="#ea580c"
+            />
+          ) : (
+            <IndiaMap
+              onClick={handleStateClick}
+              size="100%"
+              mapColor="#fef3c7"
+              strokeColor="#c2410c"
+              strokeWidth="0.8"
+              hoverColor="#ea580c"
+            />
+          )}
         </div>
 
         <div className="flex flex-col">
@@ -78,35 +138,51 @@ export default function IndiaMapSection({ initialEvents = [] }: IndiaMapSectionP
                 Select a State
               </h3>
               <p className="mt-2 max-w-sm text-gray-600">
-                Click on any state on the map to view social activities and upcoming events
-                organized by the Bhavsar Kshatriya Samaj in that region.
+                Click on any state on the map to open its district view and browse social
+                activities and upcoming events organized by the Bhavsar Kshatriya Samaj.
               </p>
             </div>
           ) : (
             <div className="space-y-6 overflow-y-auto rounded-2xl border border-orange-100 bg-white p-6 shadow-sm">
               <div className="flex items-start justify-between">
                 <div>
-                  <h3 className="text-2xl font-bold text-orange-950">{stateName}</h3>
+                  <h3 className="text-2xl font-bold text-orange-950">{regionLabel}</h3>
                   <p className="text-sm text-gray-500">
-                    {stateEvents.length} activit{stateEvents.length === 1 ? "y" : "ies"} found
+                    {regionEvents.length} activit{regionEvents.length === 1 ? "y" : "ies"}{" "}
+                    found
+                    {selectedDistrict ? " in this district" : " in this state"}
                   </p>
                 </div>
                 <button
                   type="button"
-                  onClick={() => setSelectedState(null)}
+                  onClick={() => {
+                    if (selectedDistrict) {
+                      setSelectedDistrict(null);
+                    } else {
+                      handleBackToIndia();
+                    }
+                  }}
                   className="rounded-lg bg-orange-100 px-3 py-1 text-sm text-orange-800 hover:bg-orange-200"
                 >
-                  Clear
+                  {selectedDistrict ? "Clear district" : "Clear"}
                 </button>
               </div>
 
-              {stateEvents.length === 0 ? (
+              {!selectedDistrict && (
+                <p className="text-sm text-gray-500">
+                  Click a district on the map to filter activities for that area.
+                </p>
+              )}
+
+              {regionEvents.length === 0 ? (
                 <p className="text-gray-500">
-                  No activities recorded yet for {stateName}. Check back soon or contact us to
-                  register your local chapter&apos;s events.
+                  No activities recorded yet for {regionLabel}. Check back soon or contact us
+                  to register your local chapter&apos;s events.
                 </p>
               ) : (
                 <>
+                  <EventPhotosPanel events={regionEvents} />
+
                   {socialActivities.length > 0 && (
                     <div>
                       <h4 className="mb-3 font-semibold text-orange-900">
