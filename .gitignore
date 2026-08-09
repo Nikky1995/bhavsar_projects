@@ -34,7 +34,7 @@ yarn-error.log*
 .env*
 !.env.example
 
-# uploaded event images (keep directory via .gitkeep)
+# admin uploads now go to public/images/events (commit new photos for Vercel deploys)
 /public/uploads/events/*
 !/public/uploads/events/.gitkeep
 

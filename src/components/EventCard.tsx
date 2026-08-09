@@ -5,6 +5,8 @@ interface EventCardProps {
   compact?: boolean;
 }
 
+const PLACEHOLDER_IMAGE = "/images/events/placeholder.svg";
+
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("en-IN", {
     day: "numeric",
@@ -26,18 +28,19 @@ const typeColors: Record<Event["type"], string> = {
 };
 
 export default function EventCard({ event, compact = false }: EventCardProps) {
+  const coverImage = event.images[0]?.url ?? PLACEHOLDER_IMAGE;
+  const coverAlt = event.images[0]?.caption ?? event.title;
+
   return (
     <article className="overflow-hidden rounded-xl border border-orange-100 bg-white shadow-sm transition-shadow hover:shadow-md">
-      {event.images.length > 0 && (
-        <div className={`relative ${compact ? "h-32" : "h-48"} w-full overflow-hidden bg-orange-50`}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={event.images[0].url}
-            alt={event.images[0].caption ?? event.title}
-            className="h-full w-full object-cover"
-          />
-        </div>
-      )}
+      <div className={`relative ${compact ? "h-32" : "h-48"} w-full overflow-hidden bg-orange-50`}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={coverImage}
+          alt={coverAlt}
+          className="h-full w-full object-cover"
+        />
+      </div>
       <div className="p-4">
         <div className="mb-2 flex flex-wrap items-center gap-2">
           <span className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${typeColors[event.type]}`}>

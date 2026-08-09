@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { promises as fs } from "fs";
-import path from "path";
 import { getEventById, saveEvent } from "@/lib/db";
 import { isAdminAuthenticated } from "@/lib/auth";
+import { getEventImageFilePath } from "@/lib/eventImages";
 
 export async function DELETE(
   request: NextRequest,
@@ -30,7 +30,7 @@ export async function DELETE(
     return NextResponse.json({ error: "Image not found" }, { status: 404 });
   }
 
-  const filePath = path.join(process.cwd(), "public", image.url);
+  const filePath = getEventImageFilePath(image.url);
   try {
     await fs.unlink(filePath);
   } catch {

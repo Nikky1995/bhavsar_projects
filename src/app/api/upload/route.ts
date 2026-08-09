@@ -4,9 +4,10 @@ import path from "path";
 import { v4 as uuidv4 } from "uuid";
 import { getEventById, saveEvent } from "@/lib/db";
 import { isAdminAuthenticated } from "@/lib/auth";
+import { EVENT_IMAGES_DIR, EVENT_IMAGES_URL_PREFIX } from "@/lib/eventImages";
 import type { EventImage } from "@/lib/types";
 
-const UPLOAD_DIR = path.join(process.cwd(), "public", "uploads", "events");
+const UPLOAD_DIR = path.join(process.cwd(), EVENT_IMAGES_DIR);
 
 export async function POST(request: NextRequest) {
   if (!(await isAdminAuthenticated())) {
@@ -42,7 +43,7 @@ export async function POST(request: NextRequest) {
 
     newImages.push({
       id: uuidv4(),
-      url: `/uploads/events/${filename}`,
+      url: `${EVENT_IMAGES_URL_PREFIX}/${filename}`,
       caption,
       createdAt: new Date().toISOString(),
     });

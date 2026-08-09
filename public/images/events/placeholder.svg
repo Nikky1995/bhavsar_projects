@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Event photo placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffedd5" />
+      <stop offset="100%" stop-color="#fed7aa" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)" />
+  <circle cx="400" cy="210" r="56" fill="#fb923c" opacity="0.25" />
+  <path
+    d="M370 230h60l-12-18a8 8 0 0 0-6.6-3.4H388a8 8 0 0 0-6.6 3.4L370 230zm30-34a14 14 0 1 0 0-28 14 14 0 0 0 0 28zm-72 34h144a12 12 0 0 0 10.4-18l-36-54a12 12 0 0 0-19.8 0l-22 33-10-13.3a12 12 0 0 0-9.6-4.7h-24a12 12 0 0 0-9.6 4.7l-10 13.3-22 33A12 12 0 0 0 328 230z"
+    fill="#ea580c"
+  />
+  <text x="400" y="320" text-anchor="middle" fill="#9a3412" font-family="Arial, sans-serif" font-size="28" font-weight="700">
+    Community Event
+  </text>
+</svg>

@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import type { Event, EventsData } from "./types";
+import { normalizeEventImageUrl } from "./eventImages";
 
 const DATA_DIR = path.join(process.cwd(), "data");
 const EVENTS_FILE = path.join(DATA_DIR, "events.json");
@@ -16,7 +17,13 @@ export async function readEvents(): Promise<Event[]> {
     await ensureDataDir();
     const raw = await fs.readFile(EVENTS_FILE, "utf-8");
     const data = JSON.parse(raw) as EventsData;
-    return data.events ?? [];
+    return (data.events ?? []).map((event) => ({
+      ...event,
+      images: event.images.map((image) => ({
+        ...image,
+        url: normalizeEventImageUrl(image.url),
+      })),
+    }));
   } catch {
     return defaultData.events;
   }
