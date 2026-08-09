@@ -55,9 +55,19 @@ export default function EventCard({ event, compact = false }: EventCardProps) {
           <p className="mt-1 line-clamp-2 text-sm text-gray-600">{event.description}</p>
         )}
         <div className="mt-3 flex flex-wrap gap-3 text-xs text-gray-500">
-          <span>📅 {formatDate(event.date)}</span>
+          <span>📅 {formatDate(event.date)}{event.time ? ` · ${event.time}` : ""}</span>
           <span>📍 {event.location}</span>
         </div>
+        {event.mapUrl && (
+          <a
+            href={event.mapUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-orange-600 hover:text-orange-800"
+          >
+            View on Google Maps →
+          </a>
+        )}
         {event.images.length > 1 && (
           <p className="mt-2 text-xs text-orange-600">
             +{event.images.length - 1} more photo{event.images.length > 2 ? "s" : ""}

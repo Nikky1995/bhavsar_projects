@@ -1,49 +1,27 @@
 {
   "events": [
     {
-      "id": "sample-mh-1",
-      "title": "Maharashtra Samaj Sammelan",
-      "description": "Annual gathering of Bhavsar Kshatriya families across Maharashtra for cultural programs, networking, and community welfare discussions.",
-      "state": "Maharashtra",
-      "stateCode": "MH",
-      "location": "Pune, Maharashtra",
-      "date": "2026-08-15",
+      "id": "bonalu-sangareddy-2026",
+      "title": "Bonalu Celebrations 2026",
+      "description": "You and your family are cordially invited to participate in the auspicious Bonalu celebrations and seek the blessings of Goddess Mahankali. Organized by Bhavsar Kshatriya Samaj, Sangareddy. Contact: Pentoji M (9440620977), Madhu S Rao (9440254946).",
+      "state": "Telangana",
+      "stateCode": "TG",
+      "district": "Sangareddy",
+      "location": "TNGO Bhavan, Opp. Ambedkar Stadium, Sangareddy",
+      "mapUrl": "https://www.google.com/maps/place/T.N.G.O.S+BHAVAN+(Function+Hall)/@17.6229926,78.0814095,17z/data=!3m1!4b1!4m6!3m5!1s0x3bcbf9b9a33dd0eb:0xb020de93edc0553e!8m2!3d17.6229875!4d78.0839844!16s%2Fg%2F1tg8h5sm?entry=ttu&g_ep=EgoyMDI2MDgwNS4xIKXMDSoASAFQAw%3D%3D",
+      "date": "2026-08-09",
+      "time": "10:30 AM IST",
       "type": "upcoming_event",
       "images": [
         {
-          "id": "b05c9851-a5ae-434a-8efa-cf1314646127",
-          "url": "/images/events/maharashtra-sammelan.jpg",
-          "createdAt": "2026-06-28T09:45:41.586Z"
+          "id": "bonalu-invite-2026",
+          "url": "/images/events/bonalu-celebrations-2026.png",
+          "caption": "Bonalu Celebrations 2026 invitation",
+          "createdAt": "2026-07-11T00:00:00.000Z"
         }
       ],
-      "createdAt": "2026-01-01T00:00:00.000Z",
-      "updatedAt": "2026-06-28T09:45:41.586Z"
-    },
-    {
-      "id": "sample-gj-1",
-      "title": "Gujarat Youth Empowerment Drive",
-      "description": "Skill development workshop and scholarship guidance session for young members of the Bhavsar community in Gujarat.",
-      "state": "Gujarat",
-      "stateCode": "GJ",
-      "location": "Ahmedabad, Gujarat",
-      "date": "2026-05-10",
-      "type": "social_activity",
-      "images": [],
-      "createdAt": "2026-01-01T00:00:00.000Z",
-      "updatedAt": "2026-01-01T00:00:00.000Z"
-    },
-    {
-      "id": "sample-ka-1",
-      "title": "Karnataka Tulja Bhavani Puja",
-      "description": "Community puja and prasad distribution organized by the Bangalore Bhavsar Samaj chapter.",
-      "state": "Karnataka",
-      "stateCode": "KA",
-      "location": "Bengaluru, Karnataka",
-      "date": "2026-04-20",
-      "type": "upcoming_event",
-      "images": [],
-      "createdAt": "2026-01-01T00:00:00.000Z",
-      "updatedAt": "2026-01-01T00:00:00.000Z"
+      "createdAt": "2026-07-11T00:00:00.000Z",
+      "updatedAt": "2026-07-11T00:00:00.000Z"
     }
   ]
 }

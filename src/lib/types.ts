@@ -11,9 +11,12 @@ export interface Event {
   description: string;
   state: string;
   stateCode: string;
+  district?: string;
   location: string;
+  mapUrl?: string;
   date: string;
   endDate?: string;
+  time?: string;
   type: "social_activity" | "upcoming_event" | "past_event";
   images: EventImage[];
   createdAt: string;

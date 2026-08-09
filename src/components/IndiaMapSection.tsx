@@ -47,6 +47,9 @@ export default function IndiaMapSection({ initialEvents = [] }: IndiaMapSectionP
     ? events.filter((event) => {
         if (event.stateCode !== selectedState) return false;
         if (!selectedDistrict) return true;
+        if (event.district) {
+          return event.district.toLowerCase() === selectedDistrict.toLowerCase();
+        }
         return event.location.toLowerCase().includes(selectedDistrict.toLowerCase());
       })
     : [];
