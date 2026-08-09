@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <div className="grid gap-8 md:grid-cols-3">
           <div>
-            <h3 className="text-lg font-bold">Bhavsar Kshatriya Samaj</h3>
+            <h3 className="text-lg font-bold">Bhavsar Kshatriya Samaj Telangana</h3>
             <p className="mt-2 text-sm text-amber-100/80">
               Connecting our community across India through social activities,
               cultural events, and shared heritage.
@@ -32,7 +32,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-8 border-t border-amber-100/20 pt-6 text-center text-sm text-amber-100/60">
-          © {new Date().getFullYear()} Bhavsar Kshatriya Samaj. All rights reserved.
+          © {new Date().getFullYear()} Bhavsar Kshatriya Samaj Telangana. All rights reserved.
         </div>
       </div>
     </footer>

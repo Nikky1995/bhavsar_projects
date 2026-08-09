@@ -24,7 +24,7 @@ export default function Header() {
           </div>
           <div>
             <h1 className="text-lg font-bold tracking-tight text-orange-900 sm:text-xl">
-              Bhavsar Kshatriya Samaj
+              Bhavsar Kshatriya Samaj Telangana
             </h1>
             <p className="hidden text-xs text-orange-700/70 sm:block">
               Unity · Service · Heritage

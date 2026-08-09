@@ -1,5 +1,6 @@
 import EventCard from "@/components/EventCard";
 import EventPhotoGallery from "@/components/EventPhotoGallery";
+import VadhuVarParichayIntro from "@/components/VadhuVarParichayIntro";
 import { readEvents } from "@/lib/db";
 
 export default async function EventsPage() {
@@ -12,7 +13,7 @@ export default async function EventsPage() {
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-bold text-orange-950">Events & Activities</h1>
       <p className="mt-2 text-gray-600">
-        Browse all community events and social activities organized by the Bhavsar Kshatriya Samaj.
+        Browse all community events and social activities organized by the Bhavsar Kshatriya Samaj Telangana.
       </p>
 
       {upcoming.length > 0 && (
@@ -54,11 +55,15 @@ export default async function EventsPage() {
         </p>
       )}
 
+      <div className="-mx-4 mt-12 sm:-mx-6 lg:-mx-8">
+        <VadhuVarParichayIntro />
+      </div>
+
       <div id="photos" className="-mx-4 mt-12 sm:-mx-6 lg:-mx-8">
         <EventPhotoGallery
           events={events}
           title="Community Photo Gallery"
-          description="Browse photos from Bhavsar Kshatriya Samaj events and social activities."
+          description="Browse photos from Bhavsar Kshatriya Samaj Telangana events and social activities."
         />
       </div>
     </div>

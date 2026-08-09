@@ -1,11 +1,11 @@
 export default function AboutPage() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-      <h1 className="text-3xl font-bold text-orange-950">About Bhavsar Kshatriya Samaj</h1>
+      <h1 className="text-3xl font-bold text-orange-950">About Bhavsar Kshatriya Samaj Telangana</h1>
 
       <div className="mt-8 space-y-6 text-gray-700 leading-relaxed">
         <p>
-          The Bhavsar Kshatriya Samaj is a vibrant community with deep roots in Indian
+          The Bhavsar Kshatriya Samaj Telangana is a vibrant community with deep roots in Indian
           history and culture. Our samaj traces its lineage to the Kshatriya warrior tradition
           and holds Tulja Bhavani Mata as our guiding deity — a symbol of strength, devotion,
           and protection.

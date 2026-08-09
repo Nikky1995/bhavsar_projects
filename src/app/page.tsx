@@ -4,6 +4,7 @@ import IndiaMapSection from "@/components/IndiaMapSection";
 import { readEvents } from "@/lib/db";
 import EventCard from "@/components/EventCard";
 import EventPhotoGallery from "@/components/EventPhotoGallery";
+import VadhuVarParichayIntro from "@/components/VadhuVarParichayIntro";
 
 export default async function HomePage() {
   const events = await readEvents();
@@ -26,7 +27,7 @@ export default async function HomePage() {
             <div className="relative overflow-hidden rounded-2xl border-4 border-amber-300/50 shadow-2xl">
               <Image
                 src="/images/Tulja_bhavani.jpeg"
-                alt="Tulja Bhavani Mata — presiding deity of the Bhavsar Kshatriya Samaj"
+                alt="Tulja Bhavani Mata — presiding deity of the Bhavsar Kshatriya Samaj Telangana"
                 width={320}
                 height={400}
                 priority
@@ -40,7 +41,7 @@ export default async function HomePage() {
               ॐ श्री तुळजा भवानी माता की जय
             </p>
             <h1 className="mt-3 text-4xl font-bold tracking-tight text-amber-50 sm:text-5xl lg:text-6xl">
-              Bhavsar Kshatriya Samaj
+              Bhavsar Kshatriya Samaj Telangana
             </h1>
             <p className="mt-4 max-w-xl text-lg text-amber-100/80">
               Welcome to our community portal. Discover social activities, cultural events,
@@ -85,6 +86,8 @@ export default async function HomePage() {
       <div id="map">
         <IndiaMapSection initialEvents={events} />
       </div>
+
+      <VadhuVarParichayIntro />
 
       {/* Event photo gallery */}
       <div id="photos">

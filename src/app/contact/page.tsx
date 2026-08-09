@@ -20,7 +20,7 @@ export default function ContactPage() {
     <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-bold text-orange-950">Contact Us</h1>
       <p className="mt-2 text-gray-600">
-        Reach out to the Bhavsar Kshatriya Samaj central committee or your local chapter.
+        Reach out to the Bhavsar Kshatriya Samaj Telangana central committee or your local chapter.
       </p>
 
       <div className="mt-10 grid gap-10 lg:grid-cols-2">

@@ -1,6 +1,6 @@
-# Bhavsar Kshatriya Samaj — Community Portal
+# Bhavsar Kshatriya Samaj Telangana — Community Portal
 
-Official web portal for the Bhavsar Kshatriya Samaj community in India. Features an interactive map of India, regional events, social activities, and an admin panel for content management.
+Official web portal for the Bhavsar Kshatriya Samaj Telangana community in India. Features an interactive map of India, regional events, social activities, and an admin panel for content management.
 
 **Live site:** [bhavsarprojects.com](https://bhavsarprojects.com)
 

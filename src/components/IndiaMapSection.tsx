@@ -81,7 +81,7 @@ export default function IndiaMapSection({ initialEvents = [] }: IndiaMapSectionP
         <p className="mt-2 text-gray-600">
           {selectedState
             ? "Hover over a district to highlight it, then click to explore activities in that area. Use Back to return to the India map."
-            : "Hover over a state to highlight it, then click to open its district map and explore Bhavsar Kshatriya Samaj activities."}
+            : "Hover over a state to highlight it, then click to open its district map and explore Bhavsar Kshatriya Samaj Telangana activities."}
         </p>
       </div>
 
@@ -139,7 +139,7 @@ export default function IndiaMapSection({ initialEvents = [] }: IndiaMapSectionP
               </h3>
               <p className="mt-2 max-w-sm text-gray-600">
                 Click on any state on the map to open its district view and browse social
-                activities and upcoming events organized by the Bhavsar Kshatriya Samaj.
+                activities and upcoming events organized by the Bhavsar Kshatriya Samaj Telangana.
               </p>
             </div>
           ) : (

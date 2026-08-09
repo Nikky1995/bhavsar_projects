@@ -17,14 +17,14 @@ const notoDevanagari = Noto_Sans_Devanagari({
 });
 
 export const metadata: Metadata = {
-  title: "Bhavsar Kshatriya Samaj | Community Portal",
+  title: "Bhavsar Kshatriya Samaj Telangana | Community Portal",
   description:
-    "Official portal of the Bhavsar Kshatriya Samaj — explore community activities, upcoming events, and connect with chapters across India.",
+    "Official portal of the Bhavsar Kshatriya Samaj Telangana — explore community activities, upcoming events, and connect with chapters across India.",
   openGraph: {
-    title: "Bhavsar Kshatriya Samaj",
+    title: "Bhavsar Kshatriya Samaj Telangana",
     description: "Unity · Service · Heritage",
     url: "https://bhavsarprojects.com",
-    siteName: "Bhavsar Kshatriya Samaj",
+    siteName: "Bhavsar Kshatriya Samaj Telangana",
   },
 };
 
