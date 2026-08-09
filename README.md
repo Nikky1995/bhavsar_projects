@@ -40,12 +40,13 @@ Two deployment options are provided:
 1. Push this repo to GitHub
 2. Import the project at [vercel.com](https://vercel.com)
 3. Set environment variable: `ADMIN_PASSWORD`
-4. Connect the GitHub repo in Vercel (Settings → Git). Pushes to `main` will deploy automatically.
-5. Optional: add GitHub secrets if you also want deploy from GitHub Actions:
+4. For the footer hit counter on Vercel, link a **Vercel KV** store (Storage → KV) so visits persist across deploys. This auto-adds `KV_REST_API_URL` and `KV_REST_API_TOKEN`.
+5. Connect the GitHub repo in Vercel (Settings → Git). Pushes to `main` will deploy automatically.
+6. Optional: add GitHub secrets if you also want deploy from GitHub Actions:
    - `VERCEL_TOKEN` — create at [vercel.com/account/tokens](https://vercel.com/account/tokens)
    - `VERCEL_ORG_ID` and `VERCEL_PROJECT_ID` — run `vercel link` locally, then copy values from `.vercel/project.json`
-6. In Vercel project settings → Domains, add `bhavsarprojects.com` and `www.bhavsarprojects.com`
-7. Update DNS at your registrar:
+7. In Vercel project settings → Domains, add `bhavsarprojects.com` and `www.bhavsarprojects.com`
+8. Update DNS at your registrar:
    - `A` record → `76.76.21.21` (Vercel)
    - `CNAME` for `www` → `cname.vercel-dns.com`
 

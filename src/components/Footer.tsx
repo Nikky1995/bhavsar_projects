@@ -1,4 +1,5 @@
 import Link from "next/link";
+import HitCounter from "./HitCounter";
 
 export default function Footer() {
   return (
@@ -33,6 +34,7 @@ export default function Footer() {
         </div>
         <div className="mt-8 border-t border-amber-100/20 pt-6 text-center text-sm text-amber-100/60">
           © {new Date().getFullYear()} Bhavsar Kshatriya Samaj Telangana. All rights reserved.
+          <HitCounter />
         </div>
       </div>
     </footer>

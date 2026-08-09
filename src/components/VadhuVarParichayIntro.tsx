@@ -1,3 +1,4 @@
+import React from "react";
 import Image from "next/image";
 
 export default function VadhuVarParichayIntro() {
@@ -11,17 +12,17 @@ export default function VadhuVarParichayIntro() {
               <div className="relative overflow-hidden rounded-2xl border-4 border-amber-200/80 shadow-lg">
                 <Image
                   src="/images/vadhu-var-parichay-president.png"
-                  alt="President of Bhavsar Kshatriya Samaj Telangana Vadhu Var Parichay"
+                  alt="Rajesh Kumar Jawalkar — President of Bhavsar Kshatriya Samaj Telangana Vadhu Var Parichay"
                   width={280}
                   height={360}
                   className="h-auto w-56 object-cover object-top sm:w-64"
                 />
               </div>
-              <p className="mt-3 text-center text-sm font-semibold text-orange-900">
-                President
+              <p className="mt-3 text-center text-xl font-bold text-orange-950 sm:text-2xl">
+                Rajesh Kumar Jawalkar
               </p>
-              <p className="text-center text-xs text-orange-700">
-                Vadhu Var Parichay
+              <p className="mt-1 text-center text-sm text-orange-700">
+                President, Vadhu Var Parichay
               </p>
             </div>
 
@@ -32,7 +33,13 @@ export default function VadhuVarParichayIntro() {
               <h2 className="mt-2 text-2xl font-bold text-orange-950 sm:text-3xl">
                 Vadhu Var Parichay
               </h2>
-              <p className="mt-4 leading-relaxed text-gray-700">
+              <p className="mt-5 text-2xl font-bold tracking-tight text-orange-950 sm:text-3xl lg:text-4xl">
+                Rajesh Kumar Jawalkar
+              </p>
+              <p className="mt-2 text-sm font-medium text-orange-700 sm:text-base">
+                President, Vadhu Var Parichay
+              </p>
+              <p className="mt-5 leading-relaxed text-gray-700">
                 The Vadhu Var Parichay initiative helps Bhavsar Kshatriya families in
                 Telangana connect for matrimonial alliances in a respectful, trusted
                 community setting. Guided by our samaj values and the blessings of Tulja
@@ -40,10 +47,10 @@ export default function VadhuVarParichayIntro() {
                 suitable life partners while preserving our cultural traditions.
               </p>
               <p className="mt-4 leading-relaxed text-gray-700">
-                Our president and committee work closely with families across Telangana to
-                organize introductions, share verified profiles, and foster meaningful
-                connections within the Bhavsar community. We invite members to participate
-                and support this seva for the next generation of our samaj.
+                Under his leadership, our committee works closely with families across
+                Telangana to organize introductions, share verified profiles, and foster
+                meaningful connections within the Bhavsar community. We invite members to
+                participate and support this seva for the next generation of our samaj.
               </p>
             </div>
           </div>
