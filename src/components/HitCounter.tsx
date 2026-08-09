@@ -14,26 +14,17 @@ export default function HitCounter() {
   useEffect(() => {
     async function recordVisit() {
       const isNewVisitor = !localStorage.getItem(VISITOR_KEY);
+      const endpoint = isNewVisitor ? "/api/hits?record=1" : "/api/hits";
 
       try {
+        const res = await fetch(endpoint, { cache: "no-store" });
+        if (!res.ok) return;
+
+        const data = (await res.json()) as { count: number };
+        setCount(data.count);
+
         if (isNewVisitor) {
-          const res = await fetch("/api/hits", {
-            method: "POST",
-            cache: "no-store",
-          });
-
-          if (res.ok) {
-            const data = await res.json();
-            setCount(data.count);
-            localStorage.setItem(VISITOR_KEY, "1");
-            return;
-          }
-        }
-
-        const res = await fetch("/api/hits", { cache: "no-store" });
-        if (res.ok) {
-          const data = await res.json();
-          setCount(data.count);
+          localStorage.setItem(VISITOR_KEY, "1");
         }
       } catch {
         setCount((current) => current ?? 0);

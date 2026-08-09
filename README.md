@@ -40,7 +40,10 @@ Two deployment options are provided:
 1. Push this repo to GitHub
 2. Import the project at [vercel.com](https://vercel.com)
 3. Set environment variable: `ADMIN_PASSWORD`
-4. For the footer hit counter on Vercel, link a **Vercel KV** store (Storage → KV) so visits persist across deploys. This auto-adds `KV_REST_API_URL` and `KV_REST_API_TOKEN`.
+4. For the footer hit counter on Vercel, add persistent storage (pick one):
+   - **Upstash Redis** (recommended): Vercel Dashboard → Storage → Marketplace → Upstash Redis → Add Integration. This sets `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN`.
+   - **Or Vercel Blob**: Storage → Blob → Create store. This sets `BLOB_READ_WRITE_TOKEN`.
+   Without one of these, the counter resets on each deploy because Vercel serverless cannot write to local files.
 5. Connect the GitHub repo in Vercel (Settings → Git). Pushes to `main` will deploy automatically.
 6. Optional: add GitHub secrets if you also want deploy from GitHub Actions:
    - `VERCEL_TOKEN` — create at [vercel.com/account/tokens](https://vercel.com/account/tokens)

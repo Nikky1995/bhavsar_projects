@@ -1,18 +1,24 @@
+import { Redis } from "@upstash/redis";
+import { list, put } from "@vercel/blob";
 import { promises as fs } from "fs";
 import path from "path";
 
 const HITS_FILE = path.join(process.cwd(), "data", "hits.json");
-const HITS_KEY = "site:hits";
+const HITS_KEY = "site-hits";
+const HITS_BLOB_PATH = "hits/count.json";
 
 interface HitsData {
   count: number;
 }
 
-function getKvConfig() {
-  const url = process.env.KV_REST_API_URL;
-  const token = process.env.KV_REST_API_TOKEN;
+function getRedis(): Redis | null {
+  const url =
+    process.env.KV_REST_API_URL ?? process.env.UPSTASH_REDIS_REST_URL;
+  const token =
+    process.env.KV_REST_API_TOKEN ?? process.env.UPSTASH_REDIS_REST_TOKEN;
+
   if (!url || !token) return null;
-  return { url: url.replace(/\/$/, ""), token };
+  return new Redis({ url, token });
 }
 
 async function readHitsFromFile(): Promise<number> {
@@ -25,58 +31,101 @@ async function readHitsFromFile(): Promise<number> {
   }
 }
 
-async function writeHitsToFile(count: number): Promise<void> {
-  await fs.mkdir(path.dirname(HITS_FILE), { recursive: true });
-  await fs.writeFile(HITS_FILE, JSON.stringify({ count }, null, 2), "utf-8");
+async function writeHitsToFile(count: number): Promise<boolean> {
+  try {
+    await fs.mkdir(path.dirname(HITS_FILE), { recursive: true });
+    await fs.writeFile(HITS_FILE, JSON.stringify({ count }, null, 2), "utf-8");
+    return true;
+  } catch {
+    return false;
+  }
 }
 
-async function readHitsFromKv(): Promise<number | null> {
-  const kv = getKvConfig();
-  if (!kv) return null;
+async function readHitsFromRedis(): Promise<number | null> {
+  const redis = getRedis();
+  if (!redis) return null;
 
-  const res = await fetch(`${kv.url}/get/${HITS_KEY}`, {
-    headers: { Authorization: `Bearer ${kv.token}` },
-    cache: "no-store",
-  });
-
-  if (!res.ok) return null;
-
-  const data = (await res.json()) as { result?: string | number | null };
-  if (data.result === null || data.result === undefined) return 0;
-  return Number(data.result);
+  try {
+    const count = await redis.get<number>(HITS_KEY);
+    return count ?? 0;
+  } catch {
+    return null;
+  }
 }
 
-async function incrementHitsInKv(): Promise<number | null> {
-  const kv = getKvConfig();
-  if (!kv) return null;
+async function incrementHitsInRedis(): Promise<number | null> {
+  const redis = getRedis();
+  if (!redis) return null;
 
-  const res = await fetch(`${kv.url}/incr/${HITS_KEY}`, {
-    method: "POST",
-    headers: { Authorization: `Bearer ${kv.token}` },
-    cache: "no-store",
-  });
+  try {
+    return await redis.incr(HITS_KEY);
+  } catch {
+    return null;
+  }
+}
 
-  if (!res.ok) return null;
+async function readHitsFromBlob(): Promise<number | null> {
+  if (!process.env.BLOB_READ_WRITE_TOKEN) return null;
 
-  const data = (await res.json()) as { result?: string | number };
-  return Number(data.result ?? 0);
+  try {
+    const { blobs } = await list({ prefix: "hits/", limit: 1 });
+    if (blobs.length === 0) return 0;
+
+    const res = await fetch(blobs[0].url, { cache: "no-store" });
+    if (!res.ok) return null;
+
+    const data = (await res.json()) as HitsData;
+    return data.count ?? 0;
+  } catch {
+    return null;
+  }
+}
+
+async function writeHitsToBlob(count: number): Promise<boolean> {
+  if (!process.env.BLOB_READ_WRITE_TOKEN) return false;
+
+  try {
+    await put(HITS_BLOB_PATH, JSON.stringify({ count }), {
+      access: "public",
+      addRandomSuffix: false,
+      allowOverwrite: true,
+    });
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 export async function getHitCount(): Promise<number> {
-  const kvCount = await readHitsFromKv();
-  if (kvCount !== null) return kvCount;
+  const redisCount = await readHitsFromRedis();
+  if (redisCount !== null) return redisCount;
+
+  const blobCount = await readHitsFromBlob();
+  if (blobCount !== null) return blobCount;
+
   return readHitsFromFile();
 }
 
 export async function incrementHitCount(): Promise<number> {
-  const kvCount = await incrementHitsInKv();
-  if (kvCount !== null) return kvCount;
+  const redisCount = await incrementHitsInRedis();
+  if (redisCount !== null) return redisCount;
+
+  const blobCount = await readHitsFromBlob();
+  if (blobCount !== null || process.env.BLOB_READ_WRITE_TOKEN) {
+    const nextCount = (blobCount ?? 0) + 1;
+    const saved = await writeHitsToBlob(nextCount);
+    if (saved) return nextCount;
+  }
 
   const nextCount = (await readHitsFromFile()) + 1;
-  try {
-    await writeHitsToFile(nextCount);
-  } catch {
-    return nextCount;
-  }
-  return nextCount;
+  const saved = await writeHitsToFile(nextCount);
+  return saved ? nextCount : nextCount;
+}
+
+export function isHitStorageConfigured(): boolean {
+  return Boolean(
+    getRedis() ||
+      process.env.BLOB_READ_WRITE_TOKEN ||
+      process.env.NODE_ENV !== "production",
+  );
 }
